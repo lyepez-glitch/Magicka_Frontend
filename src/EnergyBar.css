@@ -1,0 +1,78 @@
+/* Energy Bar container and appearance */
+
+.energy-bar-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.energy-bar {
+    width: 100%;
+    height: 20px;
+    background-color: lightgray;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.energy-bar-filled {
+    height: 100%;
+    background-color: green;
+    transition: width 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+
+/* Animation for attack effect */
+
+.energy-bar-filled.attacking {
+    background-color: red;
+    animation: attackAnimation 1s ease-out;
+}
+
+@keyframes attackAnimation {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px 10px rgba(255, 0, 0, 1);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.7);
+    }
+}
+
+
+/* Glowing blast effect when attacking */
+
+.energy-power-icon .blast-animation {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 0, 0, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 1);
+    animation: blastEffect 1s ease-out;
+}
+
+@keyframes blastEffect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
