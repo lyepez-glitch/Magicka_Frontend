@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8000/', // Django example
+    baseURL: 'https://magicka-app.onrender.com/', // Django example
     headers: {
         'Content-Type': 'application/json',
     },

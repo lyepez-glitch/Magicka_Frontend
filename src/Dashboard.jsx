@@ -21,11 +21,11 @@ const Dashboard = () => {
     // Assuming you have an API or some data fetching method
     const fetchPowers = async () => {
       try {
-        const response = await fetch('http://localhost:8000/powers');
+        const response = await fetch('https://magicka-app.onrender.com/powers');
         const data = await response.json();
         console.log('powers',data.powers);
         dispatch(setPowers(data.powers));
-        const usersResponse = await fetch('http://localhost:8000/users');
+        const usersResponse = await fetch('https://magicka-app.onrender.com/users');
         const usersData  = await usersResponse.json();
         setUsers(usersData.users);
       } catch (error) {

@@ -22,7 +22,7 @@ const Room = () => {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await fetch(`http://localhost:8000/users/${userId}`, {
+        const response = await fetch(`https://magicka-app.onrender.com/users/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -40,9 +40,8 @@ const Room = () => {
 
     fetchUserProfile();
     const token = localStorage.getItem("authToken");
-    const ws = new WebSocket(`ws://localhost:8000/ws/battle/${userId}/`);
-
-    console.log(`ws://localhost:8000/ws/battle/${userId}/`);
+    const ws = new WebSocket(`ws://magicka-app.onrender.com/ws/battle/${userId}/`);
+    console.log(`ws://magicka-app.onrender.com/ws/battle/${userId}/`);
     ws.onopen = () => {
       console.log("WebSocket connected");
     };
@@ -97,7 +96,7 @@ const Room = () => {
 
   // const attackOpponent = async (e, power, user) => {
   //   try {
-  //     const response = await fetch('http://localhost:8000/attackUser/', {
+  //     const response = await fetch('https://magicka-app.onrender.com/attackUser/', {
   //       method: 'POST',
   //       headers: { 'Content-Type': 'application/json' },
   //       body: JSON.stringify({
