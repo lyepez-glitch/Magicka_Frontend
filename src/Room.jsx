@@ -40,8 +40,8 @@ const Room = () => {
 
     fetchUserProfile();
     const token = localStorage.getItem("authToken");
-    const ws = new WebSocket(`ws://magicka-app.onrender.com/ws/battle/${userId}/`);
-    console.log(`ws://magicka-app.onrender.com/ws/battle/${userId}/`);
+    const ws = new WebSocket(`wss://magicka-app.onrender.com/ws/battle/${userId}/`);
+    console.log(`wss://magicka-app.onrender.com/ws/battle/${userId}/`);
     ws.onopen = () => {
       console.log("WebSocket connected");
     };
@@ -69,7 +69,7 @@ const Room = () => {
     setSocket(ws);
     return () => {
       console.log('Closing WebSocket');
-      // ws.close();
+      /// ws.close();
     };
   }, [userId]);
 
