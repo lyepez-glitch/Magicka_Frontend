@@ -17,11 +17,11 @@ const AttackButton = ({ power }) => {
                 setAnimationClass('ice-shard');
             }
             const result = await launchAttack({"power_id":power.id});
-            console.log('attack result',result);
+
             dispatch(updateEnergy({ max: 100,level: result.remaining_energy}));
             dispatch(addAttack({ name: result.name, timestamp: result.timestamp }));
         } catch (err) {
-            console.error('Attack failed:', err);
+            console.error('Attack failed:');
         }
     };
 

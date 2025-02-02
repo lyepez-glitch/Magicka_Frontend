@@ -16,44 +16,45 @@ const Room = () => {
   const [socket, setSocket] = useState(null);
   const [attackMessage, setAttackMessage] = useState('');
   const [animationClass,setAnimationClass] = useState('');
-
+  const backendUrl = import.meta.env.VITE_RENDER_URL;
   useEffect(() => {
     // Fetch user profile based on userId
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await fetch(`https://magicka-app.onrender.com/users/${userId}`, {
+        const response = await fetch(`${backendUrl}/users/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
         });
         const data = await response.json();
-        console.log('fetching room user',data)
+
         setUser(data.user)
         setAvatar(data.avatar || 'default url'); // Assuming API response structure is { user: { ... } }
         setEnergyLevel(data.energy_level)
 
       } catch (error) {
-        console.error('Error fetching user profile:', error);
+        console.error('Error fetching user profile:');
       }
     };
 
     fetchUserProfile();
     const token = localStorage.getItem("authToken");
-    const ws = new WebSocket(`wss://magicka-app.onrender.com/ws/battle/${userId}/`);
-    console.log(`wss://magicka-app.onrender.com/ws/battle/${userId}/`);
+    const socketUrl = import.meta.env.SOCKET_URL;
+    const ws = new WebSocket(`${socketUrl}/battle/${userId}/`);
+
     ws.onopen = () => {
       console.log("WebSocket connected");
     };
     ws.onclose = (event) => {
-      console.log("WebSocket closed:", event);
+      console.log("WebSocket closed:");
     };
     ws.onerror = (error) => {
-      console.log("WebSocket Error:", error);
+      console.log("WebSocket Error:");
     };
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log('ws data',data)
+
       // setAvatar(data.avatar);
       setEnergyLevel(data.energy_level);
 
@@ -74,7 +75,7 @@ const Room = () => {
   }, [userId]);
 
   const attackOpponent = async (e, power, user) => {
-    console.log('socket ',socket,user)
+    console.log('socket ')
     if (power.name === 'Fireball') {
       setAnimationClass('fire-blast');
   } else if (power.name === 'Ice Shard') {
@@ -87,31 +88,14 @@ const Room = () => {
         target_id: user.id,
         power_id: power.id,
       };
-      console.log('attack data payload ',attackData);
+      console.log('attack data payload ');
       socket.send(JSON.stringify(attackData));
     }
     setTimeout(() => setAnimationClass(''), 3000);
   };
 
 
-  // const attackOpponent = async (e, power, user) => {
-  //   try {
-  //     const response = await fetch('https://magicka-app.onrender.com/attackUser/', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         attacker_id: myUser.id,
-  //         target_id: user.id,
-  //         power_id: power.id,
-  //       }),
-  //     });
 
-  //     const data = await response.json();
-  //     console.log('Attack Response:', data);
-  //   } catch (error) {
-  //     console.error('Error during attack:', error);
-  //   }
-  // };
   return (
     <div className="container mt-5">
       {user ? (

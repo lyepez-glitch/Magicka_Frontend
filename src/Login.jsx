@@ -14,7 +14,7 @@ const Login = ({setLogin}) => {
         e.preventDefault();
         try {
             const data = await login({ username, password });
-            console.log('data',data);
+
             // localStorage.setItem('authToken', data.token);
             localStorage.setItem('authToken', data.access);
             dispatch(setUser({ username,id:data.id }));

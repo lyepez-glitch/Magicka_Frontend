@@ -1,8 +1,9 @@
 // src/services/apiService.js
 import axios from 'axios';
-
+const backendUrl =
+    import.meta.env.VITE_RENDER_URL;
 const api = axios.create({
-    baseURL: 'https://magicka-app.onrender.com/', // Django example
+    baseURL: backendUrl, // Django example
     headers: {
         'Content-Type': 'application/json',
     },

@@ -17,19 +17,19 @@ const Dashboard = () => {
   const attackHistory = useSelector((state) => state.attackHistory);
   const [editProfile, setEditProfile] = useState(false);
   const dispatch = useDispatch();
+  const backendUrl = import.meta.env.VITE_RENDER_URL;
   useEffect(() => {
     // Assuming you have an API or some data fetching method
     const fetchPowers = async () => {
       try {
-        const response = await fetch('https://magicka-app.onrender.com/powers');
+        const response = await fetch(`${backendUrl}powers`);
         const data = await response.json();
-        console.log('powers',data.powers);
         dispatch(setPowers(data.powers));
-        const usersResponse = await fetch('https://magicka-app.onrender.com/users');
+        const usersResponse = await fetch(`${backendUrl}users`);
         const usersData  = await usersResponse.json();
         setUsers(usersData.users);
       } catch (error) {
-        console.error('Error fetching powers:', error);
+        console.error('Error fetching powers:');
       }
     };
 

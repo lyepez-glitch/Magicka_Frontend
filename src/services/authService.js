@@ -2,7 +2,7 @@
 import api from './apiService';
 
 export const login = async(credentials) => {
-    console.log('creds', credentials);
+
     const response = await api.post('/login/', credentials);
     return response.data;
 };
