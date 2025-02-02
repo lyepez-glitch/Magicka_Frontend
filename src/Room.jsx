@@ -40,7 +40,7 @@ const Room = () => {
 
     fetchUserProfile();
     const token = localStorage.getItem("authToken");
-    const socketUrl = import.meta.env.SOCKET_URL;
+    const socketUrl = import.meta.env.VITE_SOCKET_URL;
     console.log('socket url',socketUrl);
     const ws = new WebSocket(`${socketUrl}/battle/${userId}/`);
 
