@@ -22,7 +22,7 @@ const Room = () => {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await fetch(`${backendUrl}/users/${userId}`, {
+        const response = await fetch(`${backendUrl}users/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
