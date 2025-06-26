@@ -27,6 +27,7 @@ const AttackButton = ({ power }) => {
 
     return (
         <button
+            className="border !border-gray-500 !bg-gray-300"
             onClick={handleAttack}
             disabled={power.energyCost > power.level}
         >

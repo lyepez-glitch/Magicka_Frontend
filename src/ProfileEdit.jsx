@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './redux/userSlice';
 // eslint-disable-next-line react/prop-types
+
+
 const ProfileEdit = ({setEditProfile}) => {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -9,18 +11,50 @@ const ProfileEdit = ({setEditProfile}) => {
     const [name, setName] = useState(user.username);
     const [avatar, setAvatar] = useState(user.avatar || '');
     const [email, setEmail] = useState(user.email);
+    const backendUrl = import.meta.env.VITE_RENDER_URL;
+
+    const fetchUserById = async (id) => {
+      try {
+        const response = await fetch(`${backendUrl}users/${id}/`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+
+            // 'Authorization': `Bearer ${yourToken}`
+          },
+          body: JSON.stringify({'user':user})
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const userData = await response.json();
+        console.log(userData);
+        return userData;
+      } catch (error) {
+        console.error('Failed to fetch user:', error);
+        return null;
+      }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setEditProfile(false);
         dispatch(setUser({ username: name,email, avatar }));
+        console.log('id',user.id);
+
+        fetchUserById(user.id);
+
     };
 
     return (
         <div className="container mt-4">
-          <div className="card shadow-sm p-4">
-            <h2 className="text-center mb-4">Edit Profile</h2>
-            <form onSubmit={handleSubmit}>
+
+          <div  className="flex justify-center items-center !pt-[5px] !bg-white card shadow-lg p-4">
+            <button onClick={()=>setEditProfile(false)} className="flex-[1_1_50%] w-[50px] !pt-[5px]">X</button>
+            <h2 className="!text-gray-500 text-center mb-4">Edit Profile</h2>
+            <form className="!w-[90%]" onSubmit={handleSubmit}>
               {/* Name Input */}
               <div className="mb-3">
                 <label htmlFor="username" className="form-label">
@@ -29,7 +63,7 @@ const ProfileEdit = ({setEditProfile}) => {
                 <input
                   type="text"
                   id="username"
-                  className="form-control"
+                  className="!border-2 !border-[lightgray] !rounded-lg form-control"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your name"
@@ -44,7 +78,7 @@ const ProfileEdit = ({setEditProfile}) => {
                 <input
                   type="email"
                   id="email"
-                  className="form-control"
+                  className="!border-2 !border-[lightgray] !rounded-lg form-control"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
@@ -59,7 +93,7 @@ const ProfileEdit = ({setEditProfile}) => {
                 <input
                   type="text"
                   id="avatar"
-                  className="form-control"
+                  className="!border-2 !border-[lightgray] !rounded-lg form-control"
                   value={avatar}
                   onChange={(e) => setAvatar(e.target.value)}
                   placeholder="Enter Avatar URL"

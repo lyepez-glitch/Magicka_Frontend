@@ -28,7 +28,7 @@ const Room = () => {
           },
         });
         const data = await response.json();
-
+        console.log('user',data);
         setUser(data.user)
         setAvatar(data.avatar || 'default url'); // Assuming API response structure is { user: { ... } }
         setEnergyLevel(data.energy_level)
