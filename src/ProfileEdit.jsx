@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './redux/userSlice';
+const energyLevel = useSelector((state) => state.energy.level);
+const avatar = useSelector((state) => state.user.avatar);
 // eslint-disable-next-line react/prop-types
 
 
@@ -13,16 +15,18 @@ const ProfileEdit = ({setEditProfile}) => {
     const [email, setEmail] = useState(user.email);
     const backendUrl = import.meta.env.VITE_RENDER_URL;
 
+
     const fetchUserById = async (id) => {
+      const token = localStorage.getItem("authToken");
       try {
         const response = await fetch(`${backendUrl}users/${id}/`, {
-          method: 'GET',
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
 
-            // 'Authorization': `Bearer ${yourToken}`
+            'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({'user':user})
+          body: JSON.stringify({avatar,energyLevel})
         });
 
         if (!response.ok) {
