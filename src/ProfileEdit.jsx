@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './redux/userSlice';
-const energyLevel = useSelector((state) => state.energy.level);
-const avatar = useSelector((state) => state.user.avatar);
+
 // eslint-disable-next-line react/prop-types
 
 
 const ProfileEdit = ({setEditProfile}) => {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const energyLevel = useSelector((state) => state.energy.level);
+    const userAvatar = useSelector((state) => state.user.avatar);
 
     const [name, setName] = useState(user.username);
     const [avatar, setAvatar] = useState(user.avatar || '');
@@ -26,7 +27,7 @@ const ProfileEdit = ({setEditProfile}) => {
 
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({avatar,energyLevel})
+          body: JSON.stringify({'avatar':userAvatar,energyLevel})
         });
 
         if (!response.ok) {
