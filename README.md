@@ -56,24 +56,17 @@ A real-time magical battle platform where users can sign up, manage profiles, ch
 npm install
 npm run dev
 Build for Production
-bash
-Copy
-Edit
+
 npm run build
 Lint
-bash
-Copy
-Edit
+
 npm run lint
 Preview Production Build
-bash
-Copy
-Edit
+
 npm run preview
 🛠 Folder Structure
 graphql
-Copy
-Edit
+
 src/
 ├── components/         # Reusable UI components
 ├── features/           # Redux features
@@ -83,9 +76,7 @@ src/
 ├── main.jsx
 └── index.css
 🧪 Running Tests
-bash
-Copy
-Edit
+
 npm run test
 📦 Deployment
 Deployed on Vercel
