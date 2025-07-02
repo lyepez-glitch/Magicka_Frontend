@@ -4,19 +4,29 @@ import {useState} from 'react';
 import AttackButtonRT from './AttackButtonRT';
 import { useSelector,useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import EnergyBar from './EnergyBar';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { updateEnergy } from './redux/energySlice';
+import { launchAttack } from './services/energyService';
+import { addAttack } from './redux/attackHistorySlice';
 
 const Room = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
   const powers = useSelector((state) => state.powers);
  const myUser = useSelector((state)=>state.user);
   const { userId } = useParams();
-  const [avatar,setAvatar] = useState('')
+  const [avatar,setAvatar] = useState('/avatar.jpg')
   const [energyLevel,setEnergyLevel] = useState(0);
   const [socket, setSocket] = useState(null);
   const [attackMessage, setAttackMessage] = useState('');
   const [animationClass,setAnimationClass] = useState('');
+  const attackHistory = useSelector((state) => state.attackHistory);
+  const energy = useSelector((state) => state.energy);
   const backendUrl = import.meta.env.VITE_RENDER_URL;
+  console.log('powers',powers)
   useEffect(() => {
     // Fetch user profile based on userId
     const fetchUserProfile = async () => {
@@ -30,7 +40,14 @@ const Room = () => {
         const data = await response.json();
         console.log('user',data);
         setUser(data.user)
-        setAvatar(data.avatar || 'default url'); // Assuming API response structure is { user: { ... } }
+        if(data.avatar){
+          setAvatar(data.avatar);
+        }else{
+          setAvatar('/public/avatar.jpg');
+        }
+
+        console.log('avatar ',avatar)
+
         setEnergyLevel(data.energy_level)
 
       } catch (error) {
@@ -75,6 +92,16 @@ const Room = () => {
     };
   }, [userId]);
 
+  const handleUserClick = async () => {
+    try {
+        navigate('/users');
+    } catch (err) {
+        console.log('err',err)
+    }
+    };
+
+
+
   const attackOpponent = async (e, power, user) => {
     console.log('socket ')
     if (power.name === 'Fireball') {
@@ -82,6 +109,11 @@ const Room = () => {
   } else if (power.name === 'Ice Shard') {
       setAnimationClass('ice-shard');
   }
+  const result = await launchAttack({"power_id":power.id});
+
+  dispatch(updateEnergy({ max: 100,level: result.remaining_energy}));
+
+  dispatch(addAttack({ name: result.name, timestamp: result.timestamp }));
     // Send attack data through WebSocket
     if (socket) {
       const attackData = {
@@ -100,41 +132,79 @@ const Room = () => {
   return (
     <div className="container mt-5">
       {user ? (
-        <div className="card shadow-sm p-4">
-          <h2 className="text-center mb-3">Room for {user.username}</h2>
-          <p className="text-center">Welcome to {user.username}'s room!</p>
-          <div className="text-center">
+        <div>
+
+
+
+          <div className="mt-[17%] roomSubContainer">
+
+            <div className=" row">
+
+            <h2 className="roomFor sm:text-center md:text-center mb-3">Room for {user.username}</h2>
+            <p className="welcomeTo sm:text-center md:text-center ">Welcome to <span className="capitalize">{user.username}</span>'s room!</p>
+            <div className="roomImgCont !sm:text-right !md:text-right !flex !sm:justify-center !md:justify-center !flex-[1_1_100%] sm:text-center md:text-center">
             <img
-              src={avatar}
+             src={avatar ? avatar : '/public/avatar.jpg'}
               alt={`${user.username}'s Avatar`}
-              className="img-fluid rounded-circle mb-3"
+              className="avatarImg !w-[200px] !h-[150px] img-fluid rounded-circle mb-3"
               style={{ width: '150px', height: '150px' }}
             />
           </div>
-          <p className="text-center">
-            {isNaN(energyLevel) || energyLevel <= 0 ? (
-              <span className="badge bg-danger">Energy level 0/100</span>
-            ) : (
-              <span className="badge bg-success">Energy level {energyLevel}/100</span>
-            )}
-          </p>
-          <h3 className="text-center mt-4">Available Attacks</h3>
-          <div className="d-flex flex-wrap justify-content-center">
-            {powers.map((power) => (
-              <div key={power.id} className="m-2">
-                <AttackButtonRT onclick={(e) => attackOpponent(e, power, user)} power={power} />
-                <div className={`attack-animation ${animationClass}`} />
+
+              <div className="energyCont !mt-[50px] col-md-8">
+                <div className="energySubCont border-2 border-[lightgray] card shadow-sm mb-3">
+                  <div className="card-body">
+                    <h4 className="card-title">Energy Level</h4>
+                    <EnergyBar level={energy.level} max={energy.max} />
+                  </div>
+                </div>
+
+
+
+                <div className="avblAttacks !mt-[50px] mb-3">
+                  <div className="">
+                    <h4 className="text-left !text-[#8B0000] mb-3">Available Attacks</h4>
+                    <div className="roomPowersCont d-flex sm:flex-wrap md:flex-wrap gap-2">
+                      {powers.map((power) => (
+
+                        // <AttackButton className="border border-gray-300 bg-gray-300 border-2  rounded-md" key={power.id} power={power} />
+                        <>
+                        <AttackButtonRT energyLevel={energy.level}  onclick={(e) => attackOpponent(e, power, user)} power={power} />
+                        <div className={`attack-animation ${animationClass}`} />
+                        </>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="divide !absolute left-[38vw] !top-0 h-screen border-l border-gray-400"></div>
+
+                <div id="attackHistoryCardCont" className="attackHistoryCardCont !mt-[10%] !md:absolute !bg-green-500 !text-white left-[18vw] sm-w-full !sm:top-0 !md:top-0 md:w-[60%] h-auto card shadow-sm">
+                  <div className="card-body">
+                    <h4 className="card-title mb-3">Attack History</h4>
+                    <ul className="list-group">
+                      {attackHistory.map((attack, index) => (
+                        <li key={index} className="!border-green-500 !bg-[#FFD700] list-group-item">
+                          You cast a <span className="font-bold attack">{attack.name}</span> at {new Date(attack.timestamp).toLocaleTimeString()}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+
+
+                </div>
+
               </div>
-            ))}
-          </div>
-          {attackMessage !== '' && attackMessage !== null && (
-            <div className="alert alert-info fade show mt-3">
-              <strong>{attackMessage}</strong>
             </div>
-          )}
-        </div>
+            <div>
+
+            </div>
+
+          </div>
+          </div>
+
       ) : (
-        <p>Loading...</p>
+        <p className="!text-[35px] !text-gray-500 !absolute !left-[35vw] !top-[200px]">Loading...</p>
       )}
     </div>
   );

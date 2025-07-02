@@ -27,7 +27,7 @@ const ProfileEdit = ({setEditProfile}) => {
 
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({'avatar':userAvatar,energyLevel})
+          body: JSON.stringify({avatar,energyLevel})
         });
 
         if (!response.ok) {

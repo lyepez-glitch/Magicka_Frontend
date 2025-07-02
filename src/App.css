@@ -137,7 +137,7 @@
 .attack-animation {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 38%;
     transform: translate(-50%, -50%);
     width: 100px;
     height: 100px;
@@ -160,12 +160,596 @@ body,
     width: 100%;
     margin: 0;
     background-color: #e8f4f8;
+    overflow-x: hidden;
 }
 
 #root {
-    height: 140%;
+    height: 100%;
 }
 
 body {
-    height: 200vh;
+    height: 100%h;
+}
+
+html {
+    background-color: #e8f4f8 !important;
+}
+
+.cardEle {
+    margin-top: -45px;
+    padding-bottom: 100px;
+    height: 60vh
+}
+
+.signupHdr {
+    font-size: 15px;
+}
+
+
+/* Small devices (phones) */
+
+@media (max-width: 640px) {
+    .introMagica {
+        font-size: 20px !important;
+    }
+    .videoBackgroundContainer {
+        height: 70vh !important;
+        margin-top: 40px !important;
+    }
+    .signUpContainer {
+        width: 100% !important;
+    }
+    .signUpCard {
+        padding-bottom: 100px !important;
+        height: 80vh !important;
+        transform: scale(.6) !important;
+        width: 100vw !important;
+        margin-top: 10px !important;
+    }
+    .pwCont {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    .signUpBtnCont {
+        margin-top: 0 !important;
+        transform: scale(.8) !important;
+        width: 50% !important;
+        max-width: 200px;
+    }
+    .signUpSubmitBtn {
+        height: 40px !important;
+    }
+    .signUpForm {
+        margin-top: 0 !important;
+    }
+    .magicaIconCont {
+        font-size: 15px;
+        position: absolute;
+        left: 10px;
+        text-align: left;
+    }
+    .linkCont {
+        margin-right: 10px;
+    }
+    .loginWrapper {
+        transform: scale(.7);
+    }
+    .loginSubCont {
+        margin-top: 40px;
+    }
+    .cardEle {
+        padding-bottom: 100px;
+        width: 400px;
+        transform: scale(1.5);
+        max-height: 85%;
+        gap: 10px;
+        margin-top: 25px !important;
+    }
+    .loginH2 {
+        font-size: 15px;
+        margin-top: -5px !important;
+    }
+    .existingMember {
+        font-size: 10px;
+        margin-top: 0 !important;
+    }
+    .loginWithCreds {
+        font-size: 10px;
+        margin-top: 10px !important;
+        margin-bottom: 0 !important;
+    }
+    .loginForm {
+        font-size: 15px;
+        margin-top: 0 !important;
+        transform: scale(.8);
+        margin-top: -20px !important;
+    }
+    .usernameCont {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        height: 50px;
+    }
+    .usernameCont>input {
+        height: 20px;
+    }
+    .passwordCont {
+        height: 50px;
+    }
+    .passwordCont input {
+        height: 20px;
+    }
+    .loginBtnCont {
+        margin-top: 50px !important;
+        display: flex;
+        justify-content: center;
+    }
+    .loginBtn {
+        height: 35px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        height: 30px !important;
+        width: 100px !important;
+    }
+    html,
+    body,
+    #root {
+        height: 150vh;
+    }
+    .divide {
+        height: 140vh;
+        left: 41vw;
+        display: none;
+    }
+    .attackHistory {
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        margin-left: 20px;
+        margin-top: 17% !important;
+        min-width: 100px !important;
+    }
+    .App {
+        /* width: 170px !important;
+        left: 10px !important; */
+    }
+    .energyLevelCont {
+        width: 50% !important;
+        min-width: 170px;
+    }
+    .energyLevelSubCont {
+        max-height: 300px;
+        width: 100%;
+        padding: 5px;
+    }
+    .energyLevelCont>h4 {
+        width: 200px;
+    }
+    .powersCont {
+        /* width: 80vw !important; */
+    }
+    .powersCont button {
+        flex: 1 !important;
+    }
+    .attackHistory .card-body {
+        width: 100% !important;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .attackHistory .card-body h4 {
+        font-size: 15px;
+        margin-bottom: 10px !important;
+    }
+    .usersBtn {
+        margin-top: 5px !important;
+        /* margin-left: 100px; */
+        position: absolute !important;
+        /* left: 25vw !important; */
+    }
+    .availableAttacksH4 {
+        width: 200px;
+    }
+    .battleBtn {
+        margin: 10px !important;
+    }
+    .attackHistoryCardCont {
+        justify-content: center;
+        align-items: center;
+        min-width: 200px;
+        padding: 0 !important;
+        padding-top: 10px !important;
+        width: 60% !important;
+        min-width: 60% !important;
+    }
+    .attackHistoryCardContainer .card-body {
+        padding: 0 !important;
+    }
+    .attackHistoryCardContainer .card-title {}
+    .avatarImg {
+        min-width: 150px;
+    }
+    .energyCont {
+        min-width: 60vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .rootContainer {
+        width: 100vw;
+    }
+    .energyCont>div {
+        /* max-height: 150px; */
+        flex: 1 1 100%;
+    }
+    .attackHistoryWrapper {
+        flex: 1 1 100%;
+    }
+    .attackHistoryCardCont {
+        transform: scale(.7);
+        margin-top: 0 !important;
+    }
+    .attack-animation {
+        left: 75%;
+    }
+}
+
+
+/* Medium devices (tablets) */
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .introMagica {
+        font-size: 20px !important;
+    }
+    .videoBackgroundContainer {
+        height: 70vh !important;
+        margin-top: 40px !important;
+    }
+    .signUpContainer {
+        width: 100% !important;
+    }
+    .signUpCard {
+        padding-bottom: 100px !important;
+        height: 80vh !important;
+        transform: scale(.6) !important;
+        width: 100vw !important;
+        margin-top: 10px !important;
+    }
+    .pwCont {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    .signUpBtnCont {
+        margin-top: 0 !important;
+        transform: scale(.8) !important;
+        width: 50% !important;
+        max-width: 200px;
+    }
+    .signUpSubmitBtn {
+        height: 40px !important;
+    }
+    .signUpForm {
+        margin-top: 0 !important;
+    }
+    .magicaIconCont {
+        font-size: 15px;
+        position: absolute;
+        left: 10px;
+        text-align: left;
+    }
+    .linkCont {
+        margin-right: 10px;
+    }
+    .loginWrapper {
+        transform: scale(.7);
+    }
+    .loginSubCont {
+        margin-top: 40px;
+    }
+    .cardEle {
+        padding-bottom: 100px;
+        width: 400px;
+        transform: scale(1.5);
+        max-height: 85%;
+        gap: 10px;
+        margin-top: 25px !important;
+    }
+    .loginH2 {
+        font-size: 15px;
+        margin-top: -5px !important;
+    }
+    .existingMember {
+        font-size: 10px;
+        margin-top: 0 !important;
+    }
+    .loginWithCreds {
+        font-size: 10px;
+        margin-top: 10px !important;
+        margin-bottom: 0 !important;
+    }
+    .loginForm {
+        font-size: 15px;
+        margin-top: 0 !important;
+        transform: scale(.8);
+        margin-top: -20px !important;
+    }
+    .usernameCont {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        height: 50px;
+    }
+    .usernameCont>input {
+        height: 20px;
+    }
+    .passwordCont {
+        height: 50px;
+    }
+    .passwordCont input {
+        height: 20px;
+    }
+    .loginBtnCont {
+        display: flex;
+        justify-content: center;
+    }
+    .loginBtn {
+        height: 35px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        height: 30px !important;
+        width: 100px !important;
+    }
+    html,
+    body,
+    #root {
+        height: 150vh;
+    }
+    .divide {
+        height: 140vh;
+        left: 41vw;
+        display: none;
+    }
+    .attackHistory {
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        margin-left: 20px;
+        margin-top: 17% !important;
+        min-width: 100px !important;
+    }
+    .App {
+        /* width: 170px !important;
+        left: 10px !important; */
+    }
+    .energyLevelCont {
+        width: 50% !important;
+        min-width: 170px;
+    }
+    .energyLevelSubCont {
+        max-height: 300px;
+        width: 100%;
+        padding: 5px;
+    }
+    .energyLevelCont>h4 {
+        width: 200px;
+    }
+    .powersCont {
+        /* width: 80vw !important; */
+    }
+    .powersCont button {
+        flex: 1 !important;
+    }
+    .attackHistory .card-body {
+        width: 100% !important;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .attackHistory .card-body h4 {
+        font-size: 15px;
+        margin-bottom: 10px !important;
+    }
+    .usersBtn {
+        margin-top: 5px !important;
+        /* margin-left: 100px; */
+        position: absolute !important;
+        /* left: 25vw !important; */
+    }
+    .availableAttacksH4 {
+        width: 200px;
+    }
+    .battleBtn {
+        margin: 10px !important;
+    }
+    .attackHistoryCardCont {
+        justify-content: center;
+        align-items: center;
+        min-width: 200px;
+        padding: 0 !important;
+        padding-top: 10px !important;
+        width: 60% !important;
+        min-width: 60% !important;
+    }
+    .attackHistoryCardContainer .card-body {
+        padding: 0 !important;
+    }
+    .attackHistoryCardContainer .card-title {}
+    .avatarImg {
+        min-width: 150px;
+    }
+    .energyCont {
+        min-width: 60vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .rootContainer {
+        width: 100vw;
+    }
+    .energyCont>div {
+        /* max-height: 150px; */
+        flex: 1 1 100%;
+    }
+    .attackHistoryWrapper {
+        flex: 1 1 100%;
+    }
+    .attackHistoryCardCont {
+        transform: scale(.7);
+        margin-top: 0 !important;
+    }
+    .attack-animation {
+        left: 40vw;
+    }
+    .usersAvatarImg {
+        min-width: 200px !important;
+    }
+}
+
+
+/* Large devices (desktops) */
+
+@media (min-width: 1025px) {
+    .videoBackgroundContainer {
+        height: 60vh !important;
+        margin-top: 70px;
+    }
+    .existingMember,
+    .loginWithCreds {
+        font-size: 12px;
+    }
+    .loginForm,
+    .signUpForm {
+        transform: scale(.7);
+        margin-top: -40px;
+    }
+    .cardEle {
+        transform: scale(.8);
+        margin-top: 5px;
+    }
+    .signUpCard {
+        padding-bottom: 100px;
+        height: 90vh !important;
+        transform: scale(.7) !important;
+        margin-top: 5px !important;
+    }
+    .signUpBtnCont {
+        margin-top: 20px;
+    }
+    .signUpForm {
+        margin-top: 10px;
+        transform: scale(.8);
+    }
+    .attackHistory {
+        margin-top: 80px;
+    }
+    html,
+    body,
+    #root {
+        height: 300vh;
+    }
+    .divide {
+        height: 250vh;
+        display: none;
+    }
+    .usersAvatarImg {
+        min-width: 200px !important;
+    }
+    .userEle {
+        padding: 10px !important;
+    }
+}
+
+@media(min-width:1025px) and (max-width:1439px) {
+    .roomSubContainer {
+        width: 100vw;
+    }
+    .roomFor {
+        text-align: left !important;
+    }
+    .welcomeTo {
+        text-align: left !important;
+    }
+    .roomImgCont {
+        justify-content: left !important;
+    }
+    .energyCont {
+        width: 100vw;
+        /* display:flex */
+    }
+    .energySubCont {
+        max-width: 30%;
+    }
+    .avblAttacks {
+        max-width: 300px;
+    }
+    .roomPowersCont {
+        flex-wrap: nowrap !important;
+    }
+}
+
+@media(min-width:1440px) {
+    html,
+    body,
+    #root {
+        height: 120vh;
+    }
+    .loginForm {
+        transform: scale(1.2);
+        margin-top: 60px;
+    }
+    .loginWithCreds {
+        font-size: 20px;
+        margin-top: 60px !important;
+    }
+    .existingMember {
+        font-size: 30px;
+        margin-top: 40px !important;
+    }
+    .loginBtn {
+        margin-top: 30px;
+    }
+    .signUpForm {
+        transform: scale(1);
+        margin-top: 100px;
+    }
+    .signupHdr {
+        font-size: 20px;
+    }
+    .signUpLabel {
+        font-size: 20px;
+    }
+    .signUpForm input {
+        height: 60px;
+        margin-bottom: 20px;
+    }
+    .signUpSubmitBtn {
+        font-size: 20px !important;
+    }
+    .signUpBtnCont {
+        margin-top: 100px !important;
+    }
+    .divide {
+        display: block;
+        height: 120vh;
+    }
+    .roomImgCont {
+        justify-content: center;
+    }
+    .energySubCont {
+        max-width: 400px;
+        height: 150px !important;
+    }
+    .energyCont {
+        /* max-width: 100vw !important;
+        display: flex; */
+    }
+    .attackHistoryCardCont {
+        position: absolute !important;
+        left: 55vw !important;
+        top: 100px !important;
+    }
 }

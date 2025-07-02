@@ -25,8 +25,8 @@ function App() {
     <>
         <div className="bar w-full min-w-full flex-[1_1_100%]  w-screen h-screen bg-[#4158ee] absolute top-0 !h-[50px] z-10"></div>
         <div className="flex justify-end items-center mt-[50px] bar w-full h-[50px] bg-white border-b border-gray-300 absolute top-0 z-10">
-        <div className="absolute absolute right-1/2 font-bold text-[30px] right-1/2 font-bold text-[30px]"><FontAwesomeIcon icon={faHatWizard}/> Magicka</div>
-        <div className="mr-[100px] absolute mt-0 flex gap-4 justify-center mt-10">
+        <div className="magicaIconCont absolute absolute right-1/2 font-bold text-[30px] right-1/2 font-bold text-[30px]"><FontAwesomeIcon icon={faHatWizard}/> Magicka</div>
+        <div className="linkCont !mr-[40px] absolute mt-0 flex gap-4 justify-center mt-10">
               <Link to="/signup" className="!no-underline text-black text-blue-600 hover:underline">Sign Up</Link>
               <Link to="/login" className="!no-underline text-black text-blue-600 hover:underline">Log In</Link>
               {loggedIn && (
@@ -38,7 +38,7 @@ function App() {
 
         </div>
         </div>
-        <div className="w-[200vw] max-w-[2000px] bg-white z-[5] absolute top-[120px] flex-[1_1_100%]   text-[50px]">Introducing Magicka</div>
+        <div className="introMagica w-[200vw] max-w-[2000px] bg-white z-[5] absolute top-[120px] flex-[1_1_100%]   text-[50px]">Introducing Magicka</div>
         <div className="absolute z-[1000] right-[10px] top-[100px] col-md-4 mb-3">
                   {editProfile ? (
                     <ProfileEdit setEditProfile={setEditProfile} />

@@ -4,10 +4,11 @@ import { launchAttack } from './services/energyService';
 import { updateEnergy } from './redux/energySlice';
 import { addAttack } from './redux/attackHistorySlice';
 import {useState} from 'react';
+import PropTypes from 'prop-types';
 
-const AttackButton = ({ power }) => {
+const AttackButton = ({setAnimationClass,energyLevel, power }) => {
     const dispatch = useDispatch();
-    const [animationClass, setAnimationClass] = useState('');
+
 
     const handleAttack = async () => {
         try {
@@ -29,11 +30,20 @@ const AttackButton = ({ power }) => {
         <button
             className="border !border-gray-500 !bg-gray-300"
             onClick={handleAttack}
-            disabled={power.energyCost > power.level}
+            disabled={power.energy_cost > energyLevel}
         >
-            {power.name} ({power.energyCost} Energy)
+            {power.name} ({power.energy_cost} Energy)
         </button>
     );
+};
+
+AttackButton.propTypes = {
+  energyLevel: PropTypes.number.isRequired,
+  power: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    energy_cost: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default AttackButton;

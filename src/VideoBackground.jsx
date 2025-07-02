@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const VideoBackground = ({ children }) => {
   return (
-    <div className="relative w-[80vw] h-[70vh] overflow-hidden">
+    <div className="videoBackgroundContainer relative w-[80vw] !h-[70vh] overflow-hidden">
       <video
         autoPlay
         muted

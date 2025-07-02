@@ -34,20 +34,18 @@ const Login = ({setLogin}) => {
     return (
         <div className="absolute bg-black/50 inset-0 backdrop-blur-md flex items-center justify-center !z-10">
 
-<div className="col-md-6 col-sm-8 col-12">
-            <div className="container mt-5">
+<div className="loginWrapper col-md-6 col-sm-8 col-12">
+            <div className="container">
       <div className="row justify-content-center">
-          <div className="flex justify-center flex-1 basis-full  w-[35vw] ">
+          <div className="loginSubCont flex justify-center flex-1 basis-full  w-[35vw] ">
               <div style={{
-              marginTop: '-45px',
-              paddingBottom: '100px',
-              height: '60vh',
-}}className="card   items-center !p-[15px] shadow-sm -mt-[45px] pb-[100px] h-[70vh] w-[35vw] mr-0">
-                  <h2 style={{fontSize:'15px'}} className="text-[15px] mt-5 !mb-0 font-semibold text-[15px]text-center mb-4">LOG IN</h2>
-                  <div className="mt-5 text-[30px]">Are you an existing Magicka member?</div>
-                  <p className="text-[20px] text-[#636363] !mt-[40px]">Login with your Magicka app credentials</p>
-                  <form className=" w-[80%] !mt-10 scale-100" onSubmit={handleSubmit}>
-                      <div className="!mb-8 flex gap-1 flex-wrap mb-3">
+
+}}className="cardEle card   items-center !p-[15px] shadow-sm sm:!mt-25px md:-mt-[45px] pb-[100px] !h-[70vh] w-[35vw] mr-0">
+                  <h2 style={{fontSize:'15px'}} className="loginH2 text-[15px]  !mb-0 font-semibold text-[15px]text-center lg:mb-4">LOG IN</h2>
+                  <div className="existingMember md:!mt-4 text-[30px]">Are you an existing Magicka member?</div>
+                  <p className="loginWithCreds text-[20px] text-[#636363] ">Login with your Magicka app credentials</p>
+                  <form className="loginForm w-[80%]  scale-100" onSubmit={handleSubmit}>
+                      <div className="usernameCont !mb-8 flex gap-1 flex-wrap mb-3">
                           <div>Username*</div>
                           <input
                               type="text"
@@ -58,7 +56,7 @@ const Login = ({setLogin}) => {
                           />
                       </div>
 
-                      <div className="!mb-8 flex gap-1 flex-wrap mb-3">
+                      <div className="passwordCont !mb-8 flex gap-1 flex-wrap mb-3">
                       <div>Password*</div>
                           <input
                               type="password"
@@ -68,8 +66,8 @@ const Login = ({setLogin}) => {
                               onChange={(e) => setPassword(e.target.value)}
                           />
                       </div>
-                      <div className="!mt-[70px] h-[50px] mt-10 text-center">
-                          <button type="submit" className="   h-[60px] btn btn-primary w-100">Login</button>
+                      <div className=" loginBtnCont h-[50px] lg:mt-10 text-center">
+                          <button type="submit" className=" loginBtn h-[60px] btn btn-primary w-100">Login</button>
                       </div>
                       {success && <p className="text-success mt-3">Login successful!</p>}
                       {error && <p className="text-danger mt-3">{error}</p>}
